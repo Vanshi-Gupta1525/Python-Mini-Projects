@@ -38,7 +38,37 @@ while True:
                 print("Student Deleted")
                 break
             
-   # elif choice == "3":
+    elif choice == "3":
+        search_id = input("Enter student roll no : ")
+        
+        search_found = False
+        
+        for student in students:
+            if student['Roll_No'] == search_id:
+                search_found = True
+                
+                print("--------Student Details---------")
+                print(f'Name: {students['Name']}')
+                print(f'Roll no : {students['Roll_No']}')
+                print(f'Contact : {students['Contact']}')
+                print(f'Course : {students['Course']}')
+                print("-----------------------------------------\n")
+                
+                
+                students['Name'] = input("Enter Name(You want to keep change):  ") or students['Name']
+                students['Roll no'] = int(input("Enter Roll no(You want to keep change):  ")) or students['Roll no']
+                students['Contact'] = int(input("Enter Contact(You want to keep change):  ")) or students['Contact']
+                students['Course'] = input("Enter Name(You want to keep change):  ") or students['Course']
+                
+                print("Record Updated !")
+                break
+    
+        if not search_found:
+            print("Error: Student ID not Found!")
+
+
+        print("\nUpdated Students List:")
+        print(students)    
             
     
     elif choice == "4":
