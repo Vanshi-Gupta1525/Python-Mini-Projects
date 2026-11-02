@@ -28,66 +28,111 @@ while True:
         students.append(item_detail)
         
         print("Student add successfully.")
+        print("---------------------------")
         
     elif choice == "2":
-        roll = int(input("Enter Roll No: "))
-        
-        for student in students:
-            if student["Roll_No"] == roll:
-                students.remove(student)
-                print("Student Deleted")
-                break
-            
-    elif choice == "3":
-        search_id = input("Enter student roll no : ")
-        
-        search_found = False
-        
-        for student in students:
-            if student['Roll_No'] == search_id:
-                search_found = True
-                
-                print("--------Student Details---------")
-                print(f'Name: {students['Name']}')
-                print(f'Roll no : {students['Roll_No']}')
-                print(f'Contact : {students['Contact']}')
-                print(f'Course : {students['Course']}')
-                print("-----------------------------------------\n")
-                
-                
-                students['Name'] = input("Enter Name(You want to keep change):  ") or students['Name']
-                students['Roll no'] = int(input("Enter Roll no(You want to keep change):  ")) or students['Roll no']
-                students['Contact'] = int(input("Enter Contact(You want to keep change):  ")) or students['Contact']
-                students['Course'] = input("Enter Name(You want to keep change):  ") or students['Course']
-                
-                print("Record Updated !")
-                break
-    
-        if not search_found:
-            print("Error: Student ID not Found!")
-
-
-        print("\nUpdated Students List:")
-        print(students)    
-            
-    
-    elif choice == "4":
-        for student in students:
-            print(student)
-            
-    elif choice == "5":
         roll = int(input("Enter Roll No: "))
         found = False
         
         for student in students:
+            
             if student["Roll_No"] == roll:
-                print(student)
+                students.remove(student)
+                
+                print("------Student Delete successfully-------")
+                print()
+                found = True
+                break
+        
+        if not found:
+            print("Student Not Found!")
+            
+            
+    elif choice == "3":
+        search_id = int(input("Enter student roll no : "))
+        
+        search_found = False
+        
+        for student in students:
+            
+            if student['Roll_No'] == search_id:
+                
+                search_found = True
+                
+                print("--------Student Details---------")
+                print(f'Name: {student['Name']}')
+                print(f'Roll no : {student['Roll_No']}')
+                print(f'Contact : {student['Contact']}')
+                print(f'Course : {student['Course']}')
+                print("-----------------------------------------\n")
+                
+                print("\n Enter New Details (Leave blank if you eant old detail !)")
+                
+                new_name = input("Enter Name : ")
+                new_roll_no = (input("Enter Roll No : "))
+                new_contact = (input("Enter Contact : "))
+                new_course = input("Enter Course : ")
+                
+                if new_name:
+                    student["Name"] = new_name
+                    
+                if new_roll_no:
+                    student["Roll_No"] = int(new_roll_no)
+                    
+                if new_contact:
+                    student["Contact"] = int(new_contact)
+                    
+                if new_course:
+                    student["Course"] = new_course
+                    
+                print("\nRecord Updated Successfully!")
+                
+                print("\n-------- Updated Student Details --------") 
+                for key, value in student.items(): 
+                    print(f"{key}: {value}")
+                    
+                print("------------------------------------------")
+                break
+        if not search_found:
+            print("Error: Student Roll No. Not Found!")
+        
+            
+    
+    elif choice == "4":
+        
+        if len(student) == 0:
+            print("List is Empty!")
+            
+        else:
+            print("----Students Details-----")
+            for student in students: 
+                for key, value in student.items():
+                    print(f"{key}: {value}")
+                print("---------------------------------------")
+        
+            
+    elif choice == "5":
+        
+        roll = int(input("Enter Roll No: "))
+        found = False
+        print("--------Student Details---------")
+        for student in students:
+            if student["Roll_No"] == roll:
+                for key, value in student.items():
+                    print(f"{key}: {value}")
+                print("--------------------------------")
                 found = True
                 
         if not found:
             print("Student Not Found")
             
+            
     else:
         print("Invalid Choice!")
+        
+    ch = input("Do you want to add more students ? Yes/No : ").lower()
+    if ch!= "yes":
+        print("Thank You !")
+        break
         
         
